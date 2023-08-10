@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default styles and add some basic styling */
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0e8e8;
+        }
+
+        header {
+            background-color: #d2a2a2;
+
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            position: relative;
+            border-radius: 116px;
+            margin: 10px 15px;
+
+        }
+
+        header h1 {
+            background-color: #643105;
+            /* display: inline; */
+            padding: 4px 30px;
+            margin: 0px 16px;
+            border-radius: 116px;
+            font-size: 2.0rem;
+            /* margin-top: 1rem; */
+            animation: bounceTitle 2s;
+
+        }
+
+        @keyframes bounceTitle {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            background-color: #eceaea;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #1156ce;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
+            border-radius: 21px;
+        }
+
+        nav ul li a:hover {
+            background-color: #0056b3;
+        }
+
+
+        .courses-button {
+            display: inline-block;
+            margin: 0 1rem;
+        }
+
+        .courses-button a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #1156ce;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-family: 'Roboto Mono', monospace;
+            border-radius: 21px;
+            /* Rounded corners for the buttons */
+        }
+
+        .courses-button a:hover {
+            background-color: #2466ad;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 2rem;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 150px;
+            padding: 1rem 0;
+            background-color: #643105;
+            margin-left: 10px;
+            margin-right: 10px;
+
+            color: #fff;
+            border-radius: 20px;
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #4d4b4b;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;/
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .course-content {
+            display: none;
+        }
+
+        .lecture-content {
+            display: none;
+        }
+
+        .code-window {
+            background-color: #111;
+            color: #fff;
+            max-width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            font-family: 'Roboto Mono', monospace;
+            white-space: pre-wrap;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .copy-button:hover {
+            background-color: #44af7a;
+        }
+
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .modal-content ul li {
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .modal-content ul li a {
+            display: block;
+            padding: 10px 20px;
+            background-color: #7cc643;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
+            border-radius: 21px;
+        }
+
+        .modal-content ul li a:hover {
+            background-color: #7fbdff;
+        }
+
+
+        .lecture-buttons {
+            text-align: center;
+        }
+
+        .lecture-buttons button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #a50ca3;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .lecture-buttons button:hover {
+            background-color: #6a0671;
+        }
+
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .video-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1> Akshdeep's CodeHub</h1>
+    </header>
+    <nav>
+        <ul>
+            <li class="courses-button"><a href="#" onclick="openModal('courses-modal')">Courses</a></li>
+            <li><a href="#" onclick="openModal('source-code-modal')">Source Code</a></li>
+            <li><a href="#notes">Notes</a></li>
+            <li><a href="#tutorials">Tutorials</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="featured">
+            <h2>Featured Code Snippets</h2>
+
+        </section>
+
+        <section id="about">
+            <h2>About Aksh's CodeHub</h2>
+            <p>Welcome to Aksh's CodeHub a place where you can learn programming easily</p>
+        </section>
+    </main>
+    <div id="courses-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('courses-modal')">&times;</span>
+            <h2>Courses</h2>
+            <ul>
+                <li><a href="#" onclick="openLectureModal('course-1')">Course 1</a></li>
+                <li><a href="#" onclick="openLectureModal('course-2')">Course 2</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div id="source-code-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('source-code-modal')">&times;</span>
+            <h2>Source Code</h2>
+            <ul>
+                <li><a href="#" onclick="showCourse('course-1')">Course 1</a></li>
+                <li><a href="#" onclick="showCourse('course-2')">Course 2</a></li>
+
+            </ul>
+            <div id="course-1" class="course-content">
+                <h3>Lecture 1</h3>
+                <div class="code-window" id="code-course-1-lecture-1">
+                    <code>// Your code for Lecture 1 of Course 1</code>
+                    <button class="copy-button" onclick="copyCode('code-course-1-lecture-1')">Copy Code</button>
+                </div>
+                <h3>Lecture 2</h3>
+                <div class="code-window" id="code-course-1-lecture-2">
+                    <code>// Your code for Lecture 2 of Course 1</code>
+                    <button class="copy-button" onclick="copyCode('code-course-1-lecture-2')">Copy Code</button>
+                </div>
+
+            </div>
+            <div id="course-2" class="course-content">
+                <h3>Lecture 1</h3>
+                <div class="code-window" id="code-course-2-lecture-1">
+                    <code>// Your code for Lecture 1 of Course 2</code>
+                    <button class="copy-button" onclick="copyCode('code-course-2-lecture-1')">Copy Code</button>
+                </div>
+                <h3>Lecture 2</h3>
+                <div class="code-window" id="code-course-2-lecture-2">
+                    <code>// Your code for Lecture 2 of Course 2</code>
+                    <button class="copy-button" onclick="copyCode('code-course-2-lecture-2')">Copy Code</button>
+                </div>
+                <h3>Lecture 3</h3>
+                <div class="code-window" id="code-course-2-lecture-2">
+                    <code>// Your code for Lecture 3 of Course 2</code>
+                    <button class="copy-button" onclick="copyCode('code-course-2-lecture-2')">Copy Code</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div id="lecture-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('lecture-modal')">&times;</span>
+            <h2 id="lecture-modal-title"></h2>
+            <div class="lecture-buttons">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="video-modal" class="modal">
+        <div class="video-modal-content">
+            <span class="close" onclick="closeModal('video-modal')">&times;</span>
+            <h2>Video Lecture</h2>
+            <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Aksh's CodeHub. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        function showCourse(courseId) {
+            const courses = document.getElementsByClassName("course-content");
+            for (let i = 0; i < courses.length; i++) {
+                courses[i].style.display = "none";
+            }
+            const courseContent = document.getElementById(courseId);
+            courseContent.style.display = "block";
+        }
+
+        function copyCode(codeId) {
+            const codeWindow = document.getElementById(codeId);
+            const code = codeWindow.querySelector("code").textContent;
+            const tempInput = document.createElement("textarea");
+            tempInput.style.position = "absolute";
+            tempInput.style.left = "-9999px";
+            document.body.appendChild(tempInput);
+            tempInput.value = code;
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Code copied to clipboard!");
+        }
+
+        function openLectureModal(courseId) {
+            const courseTitle = document.querySelector(`#${courseId} h3`).textContent;
+            document.getElementById("lecture-modal-title").textContent = courseTitle;
+            const lectures = document.querySelectorAll(`#${courseId} .code-window`);
+            const lectureButtonsContainer = document.querySelector(".lecture-buttons");
+            lectureButtonsContainer.innerHTML = ""; // Clear existing buttons
+            lectures.forEach((lecture, index) => {
+                const lectureButton = document.createElement("button");
+                lectureButton.textContent = `Lecture ${index + 1}`;
+                lectureButton.onclick = () => openVideoModal(courseTitle, index + 1);
+                lectureButtonsContainer.appendChild(lectureButton);
+            });
+            openModal('lecture-modal');
+        }
+
+        function openVideoModal(courseTitle, lectureNumber) {
+            const videoModal = document.getElementById("video-modal");
+            const videoModalContent = document.querySelector(".video-modal-content");
+            const videoId = getYouTubeVideoId(); // Replace this function with a method to get the YouTube Video ID for each lecture
+            const videoIframe = document.createElement("iframe");
+            videoIframe.setAttribute("width", "560");
+            videoIframe.setAttribute("height", "315");
+            videoIframe.setAttribute("src", `https://www.youtube.com/embed/${videoId}`); // Use the YouTube Video ID here
+            videoIframe.setAttribute("frameborder", "0");
+            videoIframe.setAttribute("allowfullscreen", "true");
+            videoModalContent.innerHTML = ""; // Clear existing content
+            videoModalContent.appendChild(videoIframe);
+            openModal('video-modal');
+        }
+
+        function getYouTubeVideoId() {
+            // Replace this function with your own logic to get the YouTube Video ID for each lecture
+            // Example: return "your-youtube-video-id";
+            return "your-youtube-video-id";
+        }
+    </script>
+</body>
+
+</html>
+
+</body>
+
+</html>
